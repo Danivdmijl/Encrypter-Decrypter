@@ -4,10 +4,11 @@ class Main {
     htmlElement;
     app;
 
-    constructor(data) {
+    constructor(data, app) {
         this.app = app;
 
         this.htmlElement = document.createElement("main");
+        this.htmlElement.classList.add("main");
         this.app.renderer.render(this.htmlElement, document.querySelector("body"));
 
         this.EncypterView = new EncypterView(this);
@@ -25,12 +26,14 @@ class EncypterView {
 
     constructor(main) {
         this.htmlElement = document.createElement("article");
+        this.htmlElement.classList.add("view");
+
         this.main = main;
 
         this.main.app.renderer.render(this.htmlElement, this.main.htmlElement);
-        this.header = new header();
-        this.body = new body();
-        this.footer = new footer();
+        this.header = new header(this, "Encryper");
+        this.body = new body(this);
+        this.footer = new footer(this, "Encryper");
     }
 }
 
@@ -43,25 +46,67 @@ class DecrypterView {
 
     constructor(main) {
         this.htmlElement = document.createElement("article");
+        this.htmlElement.classList.add("view");
+
         this.main = main;
 
         this.main.app.renderer.render(this.htmlElement, this.main.htmlElement);
-        this.header = new header();
-        this.body = new body();
-        this.footer = new footer();
+        this.header = new header(this, "DeCrypter");
+        this.body = new body(this);
+        this.footer = new footer(this, "DeCrypter");
     }
 }
 
 class header {
+    htmlElement;
+    view;
+    headingHtmlElement;
 
+    constructor(view, headingText) {
+        this.htmlElement = document.createElement("header");
+        this.htmlElement.classList.add("view__header");
+        this.headingHtmlElement = document.createElement("h1");
+        this.headingHtmlElement.classList.add("view__heading");
+        this.htmlElement.appendChild(this.headingHtmlElement);
+        this.headingHtmlElement.innerText = headingText;
+        this.view = view;
+        this.view.main.app.renderer.render(this.htmlElement, this.view.htmlElement);
+    }
 }
 
 class body {
+    htmlElement;
+    view;
+    inputHtmlElement;
 
+
+    constructor(view) {
+        this.htmlElement = document.createElement("section");
+        this.htmlElement.classList.add("view__body");
+        this.inputHtmlElement = document.createElement("textarea");
+        this.inputHtmlElement.classList.add("view__input")
+        this.htmlElement.appendChild(this.inputHtmlElement);
+        this.inputHtmlElement.value = "lorem";
+        this.view = view;
+        this.view.main.app.renderer.render(this.htmlElement, this.view.htmlElement);
+    }
 }
 
 class footer {
+    htmlElement;
+    view;
+    buttonHtmlElement;
 
+    constructor(view, footerText) {
+        this.htmlElement = document.createElement("footer");
+        this.htmlElement.classList.add("view__footer");
+        this.buttonHtmlElement = document.createElement("button");
+        this.buttonHtmlElement.classList.add("view__button");
+        this.buttonHtmlElement.innerText = footerText;
+        this.htmlElement.appendChild(this.buttonHtmlElement);
+        this.view = view;
+        this.view.main.app.renderer.render(this.htmlElement, this.view.htmlElement);
+    }
 }
 
 class App {
@@ -88,4 +133,3 @@ class App {
 }
 
 const app = new App();
-console.log(app);

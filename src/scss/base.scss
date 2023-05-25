@@ -3,4 +3,18 @@
 body{
     min-height: 100vh;
     font-size: 2rem;
+    font-family: sans-serif;
+    background: linear-gradient(to right, #B2A4FF, #FFB4B4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main{
+    width: 100%;
+    padding: 4rem;
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
 }
