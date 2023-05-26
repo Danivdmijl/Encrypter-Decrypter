@@ -11,8 +11,8 @@ class Main {
         this.htmlElement.classList.add("main");
         this.app.renderer.render(this.htmlElement, document.querySelector("body"));
 
-        this.EncypterView = new EncypterView(this);
-        this.DecrypterView = new DecrypterView(this);
+        this.EncypterView = new EncypterView(this, data.encrypt);
+        this.DecrypterView = new DecrypterView(this, data.decrypt);
     }
 }
 
@@ -24,7 +24,7 @@ class EncypterView {
     htmlElement;
     main;
 
-    constructor(main) {
+    constructor(main, placeholder) {
         this.htmlElement = document.createElement("article");
         this.htmlElement.classList.add("view");
 
@@ -32,7 +32,7 @@ class EncypterView {
 
         this.main.app.renderer.render(this.htmlElement, this.main.htmlElement);
         this.header = new header(this, "Encryper");
-        this.body = new body(this);
+        this.body = new body(this, placeholder);
         this.footer = new footer(this, "Encryper");
     }
 }
@@ -44,7 +44,7 @@ class DecrypterView {
     htmlElement;
     main;
 
-    constructor(main) {
+    constructor(main, placeholder) {
         this.htmlElement = document.createElement("article");
         this.htmlElement.classList.add("view");
 
@@ -52,7 +52,7 @@ class DecrypterView {
 
         this.main.app.renderer.render(this.htmlElement, this.main.htmlElement);
         this.header = new header(this, "DeCrypter");
-        this.body = new body(this);
+        this.body = new body(this, placeholder);
         this.footer = new footer(this, "DeCrypter");
     }
 }
@@ -80,13 +80,13 @@ class body {
     inputHtmlElement;
 
 
-    constructor(view) {
+    constructor(view, placeholder) {
         this.htmlElement = document.createElement("section");
         this.htmlElement.classList.add("view__body");
         this.inputHtmlElement = document.createElement("textarea");
         this.inputHtmlElement.classList.add("view__input")
         this.htmlElement.appendChild(this.inputHtmlElement);
-        this.inputHtmlElement.value = "lorem";
+        this.inputHtmlElement.placeholder = placeholder;
         this.view = view;
         this.view.main.app.renderer.render(this.htmlElement, this.view.htmlElement);
     }
