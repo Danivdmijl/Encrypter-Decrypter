@@ -11,3 +11,6 @@ class API {
         return dataToBeReturned;
     }
 }
+
+
+// Haalt de Data op uit json file en laat js wachten tot het geladen is

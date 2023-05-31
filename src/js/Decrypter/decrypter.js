@@ -1,7 +1,7 @@
 class Decrypter {
     decrypt(stringToDecrypt) {
-        stringToDecrypt = stringToDecrypt.toUpperCase();
-     let decryptedString = [];
+        stringToDecrypt = stringToDecrypt.toUpperCase(); // veranderd tekst die binnen komt in UPPERCASE
+     let decryptedString = []; // maakt lege array
         for (let i = 0; i < stringToDecrypt.length; i++) {
             switch (stringToDecrypt[i]) {
                 case "D":
@@ -86,8 +86,9 @@ class Decrypter {
                 default:
                     decryptedString.push(stringToDecrypt[i]);
             }
+            // All deze code zorg dat als een letter bijvoorbeeld A is hij het veranderd door een case
         }
         decryptedString = decryptedString.join("");
-        console.log(decryptedString);
+        return decryptedString;
     }
 }

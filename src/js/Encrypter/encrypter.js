@@ -90,6 +90,6 @@ class Encrypter {
             }
         }
         encryptedString = encryptedString.join("");
-        console.log(encryptedString);
+        return encryptedString;
     }
 }
